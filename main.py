@@ -7,9 +7,20 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 if __name__ == '__main__':
 
-    dicts = pandas.read_excel('wine3.xlsx', sheet_name='Лист1',
-                              usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values=['nan'],
-                              keep_default_na=False)
+    dicts = pandas.read_excel(
+        'wine3.xlsx',
+        sheet_name='Лист1',
+        usecols=[
+            'Категория',
+            'Название',
+            'Сорт',
+            'Цена',
+            'Картинка',
+            'Акция'
+        ],
+        na_values=['nan'],
+        keep_default_na=False
+    )
     excel_data_df = dicts.to_dict(orient='records')
 
     wines = collections.defaultdict(list)
