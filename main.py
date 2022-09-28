@@ -5,32 +5,34 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-dicts = pandas.read_excel('wine3.xlsx', sheet_name='Лист1',
-                          usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values=['nan'],
-                          keep_default_na=False)
-excel_data_df = dicts.to_dict(orient='records')
+if __name__ == '__main__':
 
-wines = collections.defaultdict(list)
-for wine in excel_data_df:
-    wines[wine["Категория"]].append(wine)
+    dicts = pandas.read_excel('wine3.xlsx', sheet_name='Лист1',
+                              usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values=['nan'],
+                              keep_default_na=False)
+    excel_data_df = dicts.to_dict(orient='records')
 
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
+    wines = collections.defaultdict(list)
+    for wine in excel_data_df:
+        wines[wine["Категория"]].append(wine)
 
-template = env.get_template('template.html')
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
 
-event_1 = datetime.datetime.now().year
-year = event_1 - 1920
+    template = env.get_template('template.html')
 
-rendered_page = template.render(
-    today_year=year,
-    wines=wines
-)
+    event_1 = datetime.datetime.now().year
+    year = event_1 - 1920
 
-with open('index.html', 'w', encoding="utf8") as file:
-    file.write(rendered_page)
+    rendered_page = template.render(
+        today_year=year,
+        wines=wines
+    )
 
-server = HTTPServer(('127.0.0.1', 8000), SimpleHTTPRequestHandler)
-server.serve_forever()
+    with open('index.html', 'w', encoding="utf8") as file:
+        file.write(rendered_page)
+
+    server = HTTPServer(('127.0.0.1', 8000), SimpleHTTPRequestHandler)
+    server.serve_forever()
