@@ -1,13 +1,9 @@
+import collections
+import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-
-import datetime
-
-import collections
-
 import pandas
-
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 dicts = pandas.read_excel('wine3.xlsx', sheet_name='Лист1',
                           usecols=['Категория', 'Название', 'Сорт', 'Цена', 'Картинка', 'Акция'], na_values=['nan'],
