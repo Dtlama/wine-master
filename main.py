@@ -34,11 +34,11 @@ if __name__ == '__main__':
 
     template = env.get_template('template.html')
 
-    event_1 = datetime.datetime.now().year
-    year = event_1 - 1920
+    year_now = datetime.datetime.now().year
+    winery_age = year_now - 1920
 
     rendered_page = template.render(
-        today_year=year,
+        today_year=winery_age,
         wines=wines
     )
 
