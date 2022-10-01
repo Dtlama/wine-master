@@ -5,7 +5,20 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
+
+def ending(num, first, second, third):
+    if num < 21 and num > 4:
+        return third
+    num = num % 10
+    if num == 1:
+        return first
+    elif num > 1 and num < 5:
+        return second
+    return third
+
+
 if __name__ == '__main__':
+    year_of_foundation = 1920
 
     dicts = pandas.read_excel(
         'wine3.xlsx',
@@ -35,11 +48,14 @@ if __name__ == '__main__':
     template = env.get_template('template.html')
 
     year_now = datetime.datetime.now().year
-    winery_age = year_now - 1920
+    winery_age = year_now - year_of_foundation
+
+    date_ending = ending(winery_age, "год", "года", "лет")
 
     rendered_page = template.render(
-        today_year=winery_age,
-        wines=wines
+        winery_age=winery_age,
+        wines=wines,
+        date_ending=date_ending
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
