@@ -6,15 +6,15 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-def get_ending(num, first, second, third):
+def get_ending(num):
     if num < 21 and num > 4:
-        return third
+        return 'лет'
     num = num % 10
     if num == 1:
-        return first
+        return 'год'
     elif num > 1 and num < 5:
-        return second
-    return third
+        return 'года'
+    return 'лет'
 
 
 if __name__ == '__main__':
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     current_year = datetime.datetime.now().year
     winery_age = current_year - foundation_year
 
-    ending_date = ending(winery_age, "год", "года", "лет")
+    ending_date = get_ending(winery_age)
 
     rendered_page = template.render(
         winery_age=winery_age,
