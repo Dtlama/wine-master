@@ -20,7 +20,7 @@ def ending(num, first, second, third):
 if __name__ == '__main__':
     foundation_year = 1920
 
-    dicts = pandas.read_excel(
+    wines_file = pandas.read_excel(
         'wine3.xlsx',
         sheet_name='Лист1',
         usecols=[
@@ -34,7 +34,7 @@ if __name__ == '__main__':
         na_values=['nan'],
         keep_default_na=False
     )
-    excel_data_df = dicts.to_dict(orient='records')
+    excel_data_df = wines_file.to_dict(orient='records')
 
     wines = collections.defaultdict(list)
     for wine in excel_data_df:
