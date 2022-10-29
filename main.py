@@ -6,7 +6,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-def ending(num, first, second, third):
+def get_ending(num, first, second, third):
     if num < 21 and num > 4:
         return third
     num = num % 10
