@@ -18,7 +18,7 @@ def ending(num, first, second, third):
 
 
 if __name__ == '__main__':
-    year_of_foundation = 1920
+    foundation_year = 1920
 
     dicts = pandas.read_excel(
         'wine3.xlsx',
@@ -47,15 +47,15 @@ if __name__ == '__main__':
 
     template = env.get_template('template.html')
 
-    year_now = datetime.datetime.now().year
-    winery_age = year_now - year_of_foundation
+    current_year = datetime.datetime.now().year
+    winery_age = current_year - foundation_year
 
-    date_ending = ending(winery_age, "год", "года", "лет")
+    ending_date = ending(winery_age, "год", "года", "лет")
 
     rendered_page = template.render(
         winery_age=winery_age,
         wines=wines,
-        date_ending=date_ending
+        date_ending=ending_date
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
