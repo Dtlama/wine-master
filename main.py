@@ -1,10 +1,10 @@
+import os
 import collections
 import datetime
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 
 import pandas
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
 
 def ending(num, first, second, third):
     if num < 21 and num > 4:
@@ -21,7 +21,7 @@ if __name__ == '__main__':
     foundation_year = 1920
 
     wines_file = pandas.read_excel(
-        'wine3.xlsx',
+        os.getenv('FILE_PATH', 'wine3.xlsx'),
         sheet_name='Лист1',
         usecols=[
             'Категория',
