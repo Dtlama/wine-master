@@ -21,7 +21,7 @@ if __name__ == '__main__':
     foundation_year = 1920
 
     wines_file = pandas.read_excel(
-        os.getenv('FILE_PATH', 'wine3.xlsx'),
+        os.getenv('FILE_PATH', 'wine.xlsx'),
         sheet_name='Лист1',
         usecols=[
             'Категория',
